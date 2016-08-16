@@ -21,7 +21,7 @@ public class Employee2ProjectEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 
 	@Column(nullable = false, length = 11)
 	private EmployeeRoles role;
@@ -41,7 +41,7 @@ public class Employee2ProjectEntity implements Serializable {
 	public Employee2ProjectEntity() {
 	}
 
-	public Employee2ProjectEntity(Long id, EmployeeRoles role, Date employeeStartOfWork, Date employeeEndOfWork,
+	public Employee2ProjectEntity(int id, EmployeeRoles role, Date employeeStartOfWork, Date employeeEndOfWork,
 			BigDecimal salary) {
 		this(role, employeeStartOfWork, employeeEndOfWork, salary);
 		this.id = id;
@@ -59,7 +59,7 @@ public class Employee2ProjectEntity implements Serializable {
 		return role;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 

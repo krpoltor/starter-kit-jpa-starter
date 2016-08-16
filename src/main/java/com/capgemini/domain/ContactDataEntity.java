@@ -19,7 +19,7 @@ public class ContactDataEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	@Id
 	private ContactDataTypes type;
 
@@ -39,7 +39,7 @@ public class ContactDataEntity implements Serializable {
 
 	}
 
-	public ContactDataEntity(Long id, ContactDataTypes type, String email, String mobilePhoneNumber,
+	public ContactDataEntity(int id, ContactDataTypes type, String email, String mobilePhoneNumber,
 			String homePhoneNumber) {
 		this(type, email, mobilePhoneNumber, homePhoneNumber);
 		this.id = id;
@@ -56,7 +56,7 @@ public class ContactDataEntity implements Serializable {
 		return email;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 

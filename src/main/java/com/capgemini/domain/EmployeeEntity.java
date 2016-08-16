@@ -18,7 +18,7 @@ public class EmployeeEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 
 	@Column(nullable = false, length = 11)
 	private String pesel;
@@ -38,7 +38,7 @@ public class EmployeeEntity implements Serializable {
 	public EmployeeEntity() {
 	}
 
-	public EmployeeEntity(Long id, String pesel, String name, String surname, Date dOB) {
+	public EmployeeEntity(int id, String pesel, String name, String surname, Date dOB) {
 		this(pesel, name, surname, dOB);
 		this.id = id;
 	}
@@ -50,7 +50,7 @@ public class EmployeeEntity implements Serializable {
 		DOB = dOB;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 

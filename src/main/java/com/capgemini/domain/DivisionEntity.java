@@ -17,7 +17,7 @@ public class DivisionEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	@Column(nullable = false, length = 45)
 	private String name;
 
@@ -28,7 +28,7 @@ public class DivisionEntity implements Serializable {
 
 	}
 
-	public DivisionEntity(Long id, String name) {
+	public DivisionEntity(int id, String name) {
 		this(name);
 		this.id = id;
 	}
@@ -37,7 +37,7 @@ public class DivisionEntity implements Serializable {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 

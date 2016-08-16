@@ -20,7 +20,7 @@ public class ProjectEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 
 	@Column(nullable = false)
 	private ProjectTypes type;
@@ -37,7 +37,7 @@ public class ProjectEntity implements Serializable {
 	public ProjectEntity() {
 	}
 
-	public ProjectEntity(Long id, ProjectTypes type, Date startOfProject, Date endOfProject) {
+	public ProjectEntity(int id, ProjectTypes type, Date startOfProject, Date endOfProject) {
 		this(type, startOfProject, endOfProject);
 		this.id = id;
 	}
@@ -48,7 +48,7 @@ public class ProjectEntity implements Serializable {
 		this.endOfProject = endOfProject;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
