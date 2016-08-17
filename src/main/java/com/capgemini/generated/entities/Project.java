@@ -1,5 +1,5 @@
 package com.capgemini.generated.entities;
-// Generated Aug 17, 2016 9:06:50 AM by Hibernate Tools 4.3.1.Final
+// Generated Aug 17, 2016 12:25:37 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "project", catalog = "starterkit_jpa")
-public class ProjectEntity implements java.io.Serializable {
+public class Project implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
@@ -29,17 +29,17 @@ public class ProjectEntity implements java.io.Serializable {
 	private Date endOfProject;
 	private Set<Employee2project> employee2projects = new HashSet<Employee2project>(0);
 
-	public ProjectEntity() {
+	public Project() {
 	}
 
-	public ProjectEntity(String name, String type, Date startOfProject, Date endOfProject) {
+	public Project(String name, String type, Date startOfProject, Date endOfProject) {
 		this.name = name;
 		this.type = type;
 		this.startOfProject = startOfProject;
 		this.endOfProject = endOfProject;
 	}
 
-	public ProjectEntity(String name, String type, Date startOfProject, Date endOfProject,
+	public Project(String name, String type, Date startOfProject, Date endOfProject,
 			Set<Employee2project> employee2projects) {
 		this.name = name;
 		this.type = type;

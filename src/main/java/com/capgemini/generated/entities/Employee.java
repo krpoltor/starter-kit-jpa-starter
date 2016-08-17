@@ -1,5 +1,5 @@
 package com.capgemini.generated.entities;
-// Generated Aug 17, 2016 9:06:50 AM by Hibernate Tools 4.3.1.Final
+// Generated Aug 17, 2016 12:25:37 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,22 +22,21 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "employee", catalog = "starterkit_jpa")
-public class EmployeeEntity implements java.io.Serializable {
+public class Employee implements java.io.Serializable {
 
 	private Integer id;
-	private ContactDataEntity contactData;
-	private DivisionEntity division;
+	private Division division;
 	private String pesel;
 	private String name;
 	private String surname;
 	private Date dob;
 	private Set<Employee2project> employee2projects = new HashSet<Employee2project>(0);
+	private Set<ContactData> contactDatas = new HashSet<ContactData>(0);
 
-	public EmployeeEntity() {
+	public Employee() {
 	}
 
-	public EmployeeEntity(ContactDataEntity contactData, DivisionEntity division, String pesel, String name, String surname, Date dob) {
-		this.contactData = contactData;
+	public Employee(Division division, String pesel, String name, String surname, Date dob) {
 		this.division = division;
 		this.pesel = pesel;
 		this.name = name;
@@ -46,15 +44,15 @@ public class EmployeeEntity implements java.io.Serializable {
 		this.dob = dob;
 	}
 
-	public EmployeeEntity(ContactDataEntity contactData, DivisionEntity division, String pesel, String name, String surname, Date dob,
-			Set<Employee2project> employee2projects) {
-		this.contactData = contactData;
+	public Employee(Division division, String pesel, String name, String surname, Date dob,
+			Set<Employee2project> employee2projects, Set<ContactData> contactDatas) {
 		this.division = division;
 		this.pesel = pesel;
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
 		this.employee2projects = employee2projects;
+		this.contactDatas = contactDatas;
 	}
 
 	@Id
@@ -70,23 +68,12 @@ public class EmployeeEntity implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({ @JoinColumn(name = "Contact_Data_type", referencedColumnName = "type", nullable = false),
-			@JoinColumn(name = "Contact_Data_id", referencedColumnName = "id", nullable = false) })
-	public ContactDataEntity getContactData() {
-		return this.contactData;
-	}
-
-	public void setContactData(ContactDataEntity contactData) {
-		this.contactData = contactData;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Division_id", nullable = false)
-	public DivisionEntity getDivision() {
+	public Division getDivision() {
 		return this.division;
 	}
 
-	public void setDivision(DivisionEntity division) {
+	public void setDivision(Division division) {
 		this.division = division;
 	}
 
@@ -134,6 +121,15 @@ public class EmployeeEntity implements java.io.Serializable {
 
 	public void setEmployee2projects(Set<Employee2project> employee2projects) {
 		this.employee2projects = employee2projects;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	public Set<ContactData> getContactDatas() {
+		return this.contactDatas;
+	}
+
+	public void setContactDatas(Set<ContactData> contactDatas) {
+		this.contactDatas = contactDatas;
 	}
 
 }

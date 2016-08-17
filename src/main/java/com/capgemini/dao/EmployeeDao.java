@@ -1,13 +1,9 @@
 package com.capgemini.dao;
 
-import java.util.List;
+public interface EmployeeDao {//extends Dao<EmployeeEntity, Integer> {
 
-import com.capgemini.generated.entities.EmployeeEntity;
+   // List<EmployeeEntity> findEmployeesByNameAndSurname(String employeeName,String employeeSurname);
 
-public interface EmployeeDao extends Dao<EmployeeEntity, Integer> {
-
-    List<EmployeeEntity> findEmployeesByNameAndSurname(String employeeName,String employeeSurname);
-
-	List<EmployeeEntity> findEmployeesByDivision(String divisionName);
+	//List<EmployeeEntity> findEmployeesByDivision(String divisionName);
 	
 }
