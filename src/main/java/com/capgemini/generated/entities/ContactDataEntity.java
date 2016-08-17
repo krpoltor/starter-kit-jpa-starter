@@ -1,11 +1,15 @@
-package com.capgemini.domain;
-// Generated Aug 17, 2016 8:43:48 AM by Hibernate Tools 4.3.1.Final
+package com.capgemini.generated.entities;
+// Generated Aug 17, 2016 9:06:50 AM by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -13,30 +17,40 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "contact_data", catalog = "starterkit_jpa")
-public class ContactData implements java.io.Serializable {
+public class ContactDataEntity implements java.io.Serializable {
 
 	private ContactDataId id;
 	private String email;
 	private String mobilePhoneNumber;
 	private String homePhoneNumber;
+	private Set<EmployeeEntity> employees = new HashSet<EmployeeEntity>(0);
+	private Set<DivisionEntity> divisions = new HashSet<DivisionEntity>(0);
 
-	public ContactData() {
+	public ContactDataEntity() {
 	}
 
-	public ContactData(ContactDataId id, String email, String mobilePhoneNumber, String homePhoneNumber) {
+	public ContactDataEntity(ContactDataId id, String email, String mobilePhoneNumber, String homePhoneNumber) {
 		this.id = id;
 		this.email = email;
 		this.mobilePhoneNumber = mobilePhoneNumber;
 		this.homePhoneNumber = homePhoneNumber;
 	}
 
+	public ContactDataEntity(ContactDataId id, String email, String mobilePhoneNumber, String homePhoneNumber,
+			Set<EmployeeEntity> employees, Set<DivisionEntity> divisions) {
+		this.id = id;
+		this.email = email;
+		this.mobilePhoneNumber = mobilePhoneNumber;
+		this.homePhoneNumber = homePhoneNumber;
+		this.employees = employees;
+		this.divisions = divisions;
+	}
+
 	@EmbeddedId
 
 	@AttributeOverrides({
 			@AttributeOverride(name = "type", column = @Column(name = "type", nullable = false, length = 4) ),
-			@AttributeOverride(name = "id", column = @Column(name = "id", nullable = false) ),
-			@AttributeOverride(name = "employeeId", column = @Column(name = "Employee_id", nullable = false) ),
-			@AttributeOverride(name = "divisionId", column = @Column(name = "Division_id", nullable = false) ) })
+			@AttributeOverride(name = "id", column = @Column(name = "id", nullable = false) ) })
 	public ContactDataId getId() {
 		return this.id;
 	}
@@ -70,6 +84,24 @@ public class ContactData implements java.io.Serializable {
 
 	public void setHomePhoneNumber(String homePhoneNumber) {
 		this.homePhoneNumber = homePhoneNumber;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactData")
+	public Set<EmployeeEntity> getEmployees() {
+		return this.employees;
+	}
+
+	public void setEmployees(Set<EmployeeEntity> employees) {
+		this.employees = employees;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactData")
+	public Set<DivisionEntity> getDivisions() {
+		return this.divisions;
+	}
+
+	public void setDivisions(Set<DivisionEntity> divisions) {
+		this.divisions = divisions;
 	}
 
 }

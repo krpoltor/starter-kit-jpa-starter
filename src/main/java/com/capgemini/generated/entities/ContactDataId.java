@@ -1,5 +1,5 @@
-package com.capgemini.domain;
-// Generated Aug 17, 2016 8:43:48 AM by Hibernate Tools 4.3.1.Final
+package com.capgemini.generated.entities;
+// Generated Aug 17, 2016 9:06:50 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,17 +12,13 @@ public class ContactDataId implements java.io.Serializable {
 
 	private String type;
 	private int id;
-	private int employeeId;
-	private int divisionId;
 
 	public ContactDataId() {
 	}
 
-	public ContactDataId(String type, int id, int employeeId, int divisionId) {
+	public ContactDataId(String type, int id) {
 		this.type = type;
 		this.id = id;
-		this.employeeId = employeeId;
-		this.divisionId = divisionId;
 	}
 
 	@Column(name = "type", nullable = false, length = 4)
@@ -43,24 +39,6 @@ public class ContactDataId implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "Employee_id", nullable = false)
-	public int getEmployeeId() {
-		return this.employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	@Column(name = "Division_id", nullable = false)
-	public int getDivisionId() {
-		return this.divisionId;
-	}
-
-	public void setDivisionId(int divisionId) {
-		this.divisionId = divisionId;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -71,9 +49,7 @@ public class ContactDataId implements java.io.Serializable {
 		ContactDataId castOther = (ContactDataId) other;
 
 		return ((this.getType() == castOther.getType()) || (this.getType() != null && castOther.getType() != null
-				&& this.getType().equals(castOther.getType()))) && (this.getId() == castOther.getId())
-				&& (this.getEmployeeId() == castOther.getEmployeeId())
-				&& (this.getDivisionId() == castOther.getDivisionId());
+				&& this.getType().equals(castOther.getType()))) && (this.getId() == castOther.getId());
 	}
 
 	public int hashCode() {
@@ -81,8 +57,6 @@ public class ContactDataId implements java.io.Serializable {
 
 		result = 37 * result + (getType() == null ? 0 : this.getType().hashCode());
 		result = 37 * result + this.getId();
-		result = 37 * result + this.getEmployeeId();
-		result = 37 * result + this.getDivisionId();
 		return result;
 	}
 

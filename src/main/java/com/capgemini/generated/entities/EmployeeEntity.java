@@ -1,5 +1,5 @@
-package com.capgemini.domain;
-// Generated Aug 17, 2016 8:43:48 AM by Hibernate Tools 4.3.1.Final
+package com.capgemini.generated.entities;
+// Generated Aug 17, 2016 9:06:50 AM by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,20 +23,22 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "employee", catalog = "starterkit_jpa")
-public class Employee implements java.io.Serializable {
+public class EmployeeEntity implements java.io.Serializable {
 
 	private Integer id;
-	private Division division;
+	private ContactDataEntity contactData;
+	private DivisionEntity division;
 	private String pesel;
 	private String name;
 	private String surname;
 	private Date dob;
 	private Set<Employee2project> employee2projects = new HashSet<Employee2project>(0);
 
-	public Employee() {
+	public EmployeeEntity() {
 	}
 
-	public Employee(Division division, String pesel, String name, String surname, Date dob) {
+	public EmployeeEntity(ContactDataEntity contactData, DivisionEntity division, String pesel, String name, String surname, Date dob) {
+		this.contactData = contactData;
 		this.division = division;
 		this.pesel = pesel;
 		this.name = name;
@@ -43,8 +46,9 @@ public class Employee implements java.io.Serializable {
 		this.dob = dob;
 	}
 
-	public Employee(Division division, String pesel, String name, String surname, Date dob,
+	public EmployeeEntity(ContactDataEntity contactData, DivisionEntity division, String pesel, String name, String surname, Date dob,
 			Set<Employee2project> employee2projects) {
+		this.contactData = contactData;
 		this.division = division;
 		this.pesel = pesel;
 		this.name = name;
@@ -66,12 +70,23 @@ public class Employee implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({ @JoinColumn(name = "Contact_Data_type", referencedColumnName = "type", nullable = false),
+			@JoinColumn(name = "Contact_Data_id", referencedColumnName = "id", nullable = false) })
+	public ContactDataEntity getContactData() {
+		return this.contactData;
+	}
+
+	public void setContactData(ContactDataEntity contactData) {
+		this.contactData = contactData;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Division_id", nullable = false)
-	public Division getDivision() {
+	public DivisionEntity getDivision() {
 		return this.division;
 	}
 
-	public void setDivision(Division division) {
+	public void setDivision(DivisionEntity division) {
 		this.division = division;
 	}
 

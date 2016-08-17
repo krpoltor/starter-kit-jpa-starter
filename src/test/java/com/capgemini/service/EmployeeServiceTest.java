@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-
-
 /**
  * Test class for testing {@link EmployeeService}<br>
  * Checklist:<br>

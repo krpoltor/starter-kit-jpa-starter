@@ -18,7 +18,6 @@ import com.capgemini.domain.BookEntity;
 @SpringBootTest
 public class BookServiceTest {
 
-
 	@Autowired
 	private BookService mSUT;
 	

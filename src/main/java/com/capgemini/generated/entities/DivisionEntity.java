@@ -1,5 +1,5 @@
-package com.capgemini.domain;
-// Generated Aug 17, 2016 8:43:48 AM by Hibernate Tools 4.3.1.Final
+package com.capgemini.generated.entities;
+// Generated Aug 17, 2016 9:06:50 AM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -18,20 +21,23 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "division", catalog = "starterkit_jpa", uniqueConstraints = @UniqueConstraint(columnNames = "name") )
-public class Division implements java.io.Serializable {
+public class DivisionEntity implements java.io.Serializable {
 
 	private Integer id;
+	private ContactDataEntity contactData;
 	private String name;
-	private Set<Employee> employees = new HashSet<Employee>(0);
+	private Set<EmployeeEntity> employees = new HashSet<EmployeeEntity>(0);
 
-	public Division() {
+	public DivisionEntity() {
 	}
 
-	public Division(String name) {
+	public DivisionEntity(ContactDataEntity contactData, String name) {
+		this.contactData = contactData;
 		this.name = name;
 	}
 
-	public Division(String name, Set<Employee> employees) {
+	public DivisionEntity(ContactDataEntity contactData, String name, Set<EmployeeEntity> employees) {
+		this.contactData = contactData;
 		this.name = name;
 		this.employees = employees;
 	}
@@ -48,6 +54,17 @@ public class Division implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({ @JoinColumn(name = "Contact_Data_type", referencedColumnName = "type", nullable = false),
+			@JoinColumn(name = "Contact_Data_id", referencedColumnName = "id", nullable = false) })
+	public ContactDataEntity getContactData() {
+		return this.contactData;
+	}
+
+	public void setContactData(ContactDataEntity contactData) {
+		this.contactData = contactData;
+	}
+
 	@Column(name = "name", unique = true, nullable = false, length = 45)
 	public String getName() {
 		return this.name;
@@ -58,11 +75,11 @@ public class Division implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "division")
-	public Set<Employee> getEmployees() {
+	public Set<EmployeeEntity> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(Set<Employee> employees) {
+	public void setEmployees(Set<EmployeeEntity> employees) {
 		this.employees = employees;
 	}
 
