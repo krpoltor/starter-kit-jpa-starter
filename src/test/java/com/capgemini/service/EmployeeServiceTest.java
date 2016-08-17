@@ -22,8 +22,49 @@ import org.junit.Test;
 public class EmployeeServiceTest {
 
 	@Test
-	public void test() {
+	public void shouldAddEmployee() {
+		//given
+		//when
+		//then
+		fail("Not yet implemented");
+	}
+	
+	public void shouldRemoveEmployee() throws Exception {
+		//given
+		//when
+		//then
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void shouldUpdateEmployeePersonalData() throws Exception {
+		//given
+		//when
+		//then
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void shouldChangeEmployeeDivision() throws Exception {
+		//given
+		//when
+		//then
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void shouldFindEmployeesByNameAndSurname() throws Exception {
+		//given
+		//when
+		//then
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void shouldFindEmployeesByDivision() throws Exception {
+		//given
+		//when
+		//then
+		fail("Not yet implemented");
+	}
 }

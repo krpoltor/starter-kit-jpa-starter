@@ -1,5 +1,5 @@
-package com.capgemini.generated.entities;
-// Generated Aug 17, 2016 8:13:47 AM by Hibernate Tools 4.3.1.Final
+package com.capgemini.domain;
+// Generated Aug 17, 2016 8:43:48 AM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
