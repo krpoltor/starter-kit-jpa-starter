@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -50,7 +51,6 @@ public class Project implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -69,6 +69,10 @@ public class Project implements java.io.Serializable {
 		this.name = name;
 	}
 
+	//TODO: @Enumerated
+	//@Version columnDefiniton = 'int default 1'
+	//created at @Temporal
+	
 	@Column(name = "type", nullable = false, length = 9)
 	public String getType() {
 		return this.type;

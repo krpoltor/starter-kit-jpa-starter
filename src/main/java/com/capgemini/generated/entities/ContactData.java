@@ -7,8 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +24,7 @@ public class ContactData implements java.io.Serializable {
 	private Division division;
 	private Employee employee;
 	private String email;
+	@Column(name = "mobilePhoneNumber", nullable = false, length = 15)
 	private String mobilePhoneNumber;
 	private String homePhoneNumber;
 
@@ -51,7 +54,7 @@ public class ContactData implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Division_id", nullable = false, insertable = false, updatable = false)
 	public Division getDivision() {
 		return this.division;
@@ -61,7 +64,7 @@ public class ContactData implements java.io.Serializable {
 		this.division = division;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Employee_id", nullable = false, insertable = false, updatable = false)
 	public Employee getEmployee() {
 		return this.employee;
@@ -80,7 +83,7 @@ public class ContactData implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "mobilePhoneNumber", nullable = false, length = 15)
+	
 	public String getMobilePhoneNumber() {
 		return this.mobilePhoneNumber;
 	}
