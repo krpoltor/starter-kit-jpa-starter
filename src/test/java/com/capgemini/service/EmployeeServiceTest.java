@@ -1,11 +1,13 @@
 package com.capgemini.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,20 +50,38 @@ public class EmployeeServiceTest {
 	@Autowired
 	private DivisionDao divisionDao;
 
-	@Test
+	@Test 
 	public void shouldAddEmployee() {
 		// given
-		ContactDataEntity cde = contactDataDao.findOne(1);
-		DivisionEntity de = divisionDao.findOne(1);
+		ContactDataEntity cde = contactDataDao.getOne(1);
+		//cde.setId(4);
+		DivisionEntity de = divisionDao.getOne(1);
+		//de.setId(4);
 		EmployeeEntity expectedEmployee = new EmployeeEntity(cde, de, "00000000000", "Krzysztof", "Półtorak", new Date(742780800L), new Date(), new Date(0L));
+		expectedEmployee.setId(11);
 		// when
 		employeeService.addEmployee(expectedEmployee);
 		// then
 		EmployeeEntity actualEmployee = employeeService.findById(11);
 		assertEquals(expectedEmployee, actualEmployee);
 	}
+	
+	@Test @Ignore
+	public void testName() {
+		// given
+	    EmployeeEntity employee = new EmployeeEntity();
+	    final String pesel = "22222222233";
+	    employee.setName("name");
+	    employee.setSurname("surname");;
+	    employee.setPesel(pesel);
+	    // when
+	    employeeService.addEmployee(employee);
+	    List<EmployeeEntity> result = employeeService.findEmployeesByNameAndSurname("name", "surname");
+	    // then
+	    assertNotNull(result);
+	}
 
-	public void shouldRemoveEmployee() throws Exception {
+	public void shouldRemoveEmployee()  {
 		// given
 		// when
 		// then
@@ -69,7 +89,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	public void shouldUpdateEmployeePersonalData() throws Exception {
+	public void shouldUpdateEmployeePersonalData() {
 		// given
 		// when
 		// then
@@ -77,7 +97,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	public void shouldChangeEmployeeDivision() throws Exception {
+	public void shouldChangeEmployeeDivision()  {
 		// given
 		// when
 		// then
@@ -85,7 +105,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	public void shouldFindEmployeesByNameAndSurname() throws Exception {
+	public void shouldFindEmployeesByNameAndSurname()  {
 		// given
 		String employeeName = "Nicole";
 		String employeeSurname = "Gilmore";
@@ -98,7 +118,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	public void shouldFindEmployeesByDivision() throws Exception {
+	public void shouldFindEmployeesByDivision()  {
 		// given
 		String divisionName = "Finances";
 		String expectedEmployeeName = "Nehru";
@@ -109,5 +129,6 @@ public class EmployeeServiceTest {
 		// then
 		assertEquals(expectedEmployeeName, employeeList.get(0).getName());
 		assertEquals(expectedEmployeeSurname, employeeList.get(0).getSurname());
+		assertEquals(1, employeeList.size());
 	}
 }
