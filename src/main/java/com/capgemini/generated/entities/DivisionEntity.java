@@ -24,29 +24,29 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "division"/*, catalog = "starterkit_jpa"*/, uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Division implements java.io.Serializable {
+public class DivisionEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	private int version;
-	private ContactData contactData;
+	private ContactDataEntity contactData;
 	private String name;
 	private Date createdAt;
 	private Date modifiedAt;
-	private Set<Employee> employees = new HashSet<Employee>(0);
+	private Set<EmployeeEntity> employees = new HashSet<EmployeeEntity>(0);
 
-	public Division() {
+	public DivisionEntity() {
 	}
 
-	public Division(ContactData contactData, String name, Date createdAt, Date modifiedAt) {
+	public DivisionEntity(ContactDataEntity contactData, String name, Date createdAt, Date modifiedAt) {
 		this.contactData = contactData;
 		this.name = name;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
 	}
 
-	public Division(ContactData contactData, String name, Date createdAt, Date modifiedAt, Set<Employee> employees) {
+	public DivisionEntity(ContactDataEntity contactData, String name, Date createdAt, Date modifiedAt, Set<EmployeeEntity> employees) {
 		this.contactData = contactData;
 		this.name = name;
 		this.createdAt = createdAt;
@@ -67,7 +67,8 @@ public class Division implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false)
+	@Column(name = "version", insertable = true, nullable = false,
+			columnDefinition="INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -77,12 +78,12 @@ public class Division implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "contact_data_id", nullable = false)
-	public ContactData getContactData() {
+	@JoinColumn(name = "contact_data_id",nullable = false)
+	public ContactDataEntity getContactData() {
 		return this.contactData;
 	}
 
-	public void setContactData(ContactData contactData) {
+	public void setContactData(ContactDataEntity contactData) {
 		this.contactData = contactData;
 	}
 
@@ -96,7 +97,9 @@ public class Division implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false, length = 19)
+	@Column(name = "created_at", 
+	columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+	nullable = false, length = 19)
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -106,7 +109,9 @@ public class Division implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_at", nullable = false, length = 19)
+	@Column(name = "modified_at", 
+	columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", 
+	nullable = false, length = 19)
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}
@@ -116,11 +121,11 @@ public class Division implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "division")
-	public Set<Employee> getEmployees() {
+	public Set<EmployeeEntity> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(Set<Employee> employees) {
+	public void setEmployees(Set<EmployeeEntity> employees) {
 		this.employees = employees;
 	}
 

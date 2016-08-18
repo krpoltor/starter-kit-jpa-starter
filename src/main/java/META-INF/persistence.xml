@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="starter-kit-jpa-starter">
-		<class>com.capgemini.generated.entities.ContactData</class>
-		<class>com.capgemini.generated.entities.Division</class>
-		<class>com.capgemini.generated.entities.Employee</class>
-		<class>com.capgemini.generated.entities.Employee2project</class>
-		<class>com.capgemini.generated.entities.Project</class>
+		<class>com.capgemini.generated.entities.ContactDataEntity</class>
+		<class>com.capgemini.generated.entities.DivisionEntity</class>
+		<class>com.capgemini.generated.entities.EmployeeEntity</class>
+		<class>com.capgemini.generated.entities.Employee2projectEntity</class>
+		<class>com.capgemini.generated.entities.ProjectEntity</class>
 	</persistence-unit>
 </persistence>

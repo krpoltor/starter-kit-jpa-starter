@@ -21,7 +21,7 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "contact_data"/*, catalog = "starterkit_jpa"*/)
-public class ContactData implements java.io.Serializable {
+public class ContactDataEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -32,13 +32,13 @@ public class ContactData implements java.io.Serializable {
 	private String homePhoneNumber;
 	private Date createdAt;
 	private Date modifiedAt;
-	private Set<Employee> employees = new HashSet<Employee>(0);
-	private Set<Division> divisions = new HashSet<Division>(0);
+	private Set<EmployeeEntity> employees = new HashSet<EmployeeEntity>(0);
+	private Set<DivisionEntity> divisions = new HashSet<DivisionEntity>(0);
 
-	public ContactData() {
+	public ContactDataEntity() {
 	}
 
-	public ContactData(String email, String mobilePhoneNumber, String homePhoneNumber, Date createdAt,
+	public ContactDataEntity(String email, String mobilePhoneNumber, String homePhoneNumber, Date createdAt,
 			Date modifiedAt) {
 		this.email = email;
 		this.mobilePhoneNumber = mobilePhoneNumber;
@@ -47,8 +47,8 @@ public class ContactData implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public ContactData(String email, String mobilePhoneNumber, String homePhoneNumber, Date createdAt, Date modifiedAt,
-			Set<Employee> employees, Set<Division> divisions) {
+	public ContactDataEntity(String email, String mobilePhoneNumber, String homePhoneNumber, Date createdAt, Date modifiedAt,
+			Set<EmployeeEntity> employees, Set<DivisionEntity> divisions) {
 		this.email = email;
 		this.mobilePhoneNumber = mobilePhoneNumber;
 		this.homePhoneNumber = homePhoneNumber;
@@ -60,7 +60,6 @@ public class ContactData implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -71,7 +70,7 @@ public class ContactData implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false)
+	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -108,7 +107,8 @@ public class ContactData implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false, length = 19)
+	@Column(name = "created_at", nullable = false, length = 19,
+			columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -118,7 +118,8 @@ public class ContactData implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_at", nullable = false, length = 19)
+	@Column(name = "modified_at", nullable = false, length = 19,
+			columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}
@@ -128,20 +129,20 @@ public class ContactData implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactData")
-	public Set<Employee> getEmployees() {
+	public Set<EmployeeEntity> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(Set<Employee> employees) {
+	public void setEmployees(Set<EmployeeEntity> employees) {
 		this.employees = employees;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactData")
-	public Set<Division> getDivisions() {
+	public Set<DivisionEntity> getDivisions() {
 		return this.divisions;
 	}
 
-	public void setDivisions(Set<Division> divisions) {
+	public void setDivisions(Set<DivisionEntity> divisions) {
 		this.divisions = divisions;
 	}
 

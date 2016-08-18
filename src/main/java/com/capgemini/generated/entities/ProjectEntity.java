@@ -21,7 +21,7 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "project"/*, catalog = "starterkit_jpa"*/)
-public class Project implements java.io.Serializable {
+public class ProjectEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -33,12 +33,12 @@ public class Project implements java.io.Serializable {
 	private Date endOfProject;
 	private Date createdAt;
 	private Date modifiedAt;
-	private Set<Employee2project> employee2projects = new HashSet<Employee2project>(0);
+	private Set<Employee2projectEntity> employee2projects = new HashSet<Employee2projectEntity>(0);
 
-	public Project() {
+	public ProjectEntity() {
 	}
 
-	public Project(String name, String type, Date startOfProject, Date endOfProject, Date createdAt, Date modifiedAt) {
+	public ProjectEntity(String name, String type, Date startOfProject, Date endOfProject, Date createdAt, Date modifiedAt) {
 		this.name = name;
 		this.type = type;
 		this.startOfProject = startOfProject;
@@ -47,8 +47,8 @@ public class Project implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public Project(String name, String type, Date startOfProject, Date endOfProject, Date createdAt, Date modifiedAt,
-			Set<Employee2project> employee2projects) {
+	public ProjectEntity(String name, String type, Date startOfProject, Date endOfProject, Date createdAt, Date modifiedAt,
+			Set<Employee2projectEntity> employee2projects) {
 		this.name = name;
 		this.type = type;
 		this.startOfProject = startOfProject;
@@ -71,7 +71,7 @@ public class Project implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false)
+	@Column(name = "version", nullable = false,columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -119,7 +119,8 @@ public class Project implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false, length = 19)
+	@Column(name = "created_at", nullable = false, length = 19,
+			columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -129,7 +130,8 @@ public class Project implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_at", nullable = false, length = 19)
+	@Column(name = "modified_at", nullable = false, length = 19,
+			columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}
@@ -139,11 +141,11 @@ public class Project implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-	public Set<Employee2project> getEmployee2projects() {
+	public Set<Employee2projectEntity> getEmployee2projects() {
 		return this.employee2projects;
 	}
 
-	public void setEmployee2projects(Set<Employee2project> employee2projects) {
+	public void setEmployee2projects(Set<Employee2projectEntity> employee2projects) {
 		this.employee2projects = employee2projects;
 	}
 
