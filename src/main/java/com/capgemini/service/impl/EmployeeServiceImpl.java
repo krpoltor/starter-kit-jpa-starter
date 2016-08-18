@@ -12,6 +12,7 @@ import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.service.EmployeeService;
 
 @Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
@@ -28,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	@Transactional
 	public void addEmployee(EmployeeEntity testEmployee) {
 		employeeDao.save(testEmployee);
 	}

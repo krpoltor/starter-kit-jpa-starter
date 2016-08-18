@@ -1,13 +1,13 @@
 package com.capgemini.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import com.capgemini.dao.ContactDataDao;
 import com.capgemini.dao.DivisionDao;
 import com.capgemini.generated.entities.ContactDataEntity;
 import com.capgemini.generated.entities.DivisionEntity;
+import com.capgemini.generated.entities.Employee2projectEntity;
 import com.capgemini.generated.entities.EmployeeEntity;
 
 /**
@@ -25,7 +26,7 @@ import com.capgemini.generated.entities.EmployeeEntity;
  * Checklist:<br>
  * 1. Add employee.<br>
  * 2. Remove employee<br>
- * 3. Should remove employee data when removing employee.<br>
+ * 3. Should remove employee related data when removing employee.<br>
  * 4. Update employee's data.<br>
  * 5. Change employee's division.<br>
  * 6. Increment version after modifying.<br>
@@ -53,33 +54,28 @@ public class EmployeeServiceTest {
 	@Test 
 	public void shouldAddEmployee() {
 		// given
-		ContactDataEntity cde = contactDataDao.getOne(1);
-		//cde.setId(4);
-		DivisionEntity de = divisionDao.getOne(1);
-		//de.setId(4);
-		EmployeeEntity expectedEmployee = new EmployeeEntity(cde, de, "00000000000", "Krzysztof", "Półtorak", new Date(742780800L), new Date(), new Date(0L));
-		expectedEmployee.setId(11);
+		EmployeeEntity expectedEmployee = new EmployeeEntity();
+		expectedEmployee.setName("Krzysztof");
+		expectedEmployee.setSurname("Poltorak");
+		expectedEmployee.setPesel("12345678900");
+		expectedEmployee.setDob(new Date());
+		expectedEmployee.setCreatedAt(new Date());
+		expectedEmployee.setModifiedAt(new Date());
+		
+		ContactDataEntity contactData = contactDataDao.getOne(1);
+		expectedEmployee.setContactData(contactData);
+		DivisionEntity division = divisionDao.getOne(1);
+		expectedEmployee.setDivision(division);
+		
+		Set<Employee2projectEntity> employee2projects = new HashSet<>();
+		expectedEmployee.setEmployee2projects(employee2projects );
 		// when
 		employeeService.addEmployee(expectedEmployee);
+		List<EmployeeEntity> result = employeeService.findEmployeesByNameAndSurname("Krzysztof", "Poltorak");
 		// then
-		EmployeeEntity actualEmployee = employeeService.findById(11);
-		assertEquals(expectedEmployee, actualEmployee);
+		
 	}
 	
-	@Test @Ignore
-	public void testName() {
-		// given
-	    EmployeeEntity employee = new EmployeeEntity();
-	    final String pesel = "22222222233";
-	    employee.setName("name");
-	    employee.setSurname("surname");;
-	    employee.setPesel(pesel);
-	    // when
-	    employeeService.addEmployee(employee);
-	    List<EmployeeEntity> result = employeeService.findEmployeesByNameAndSurname("name", "surname");
-	    // then
-	    assertNotNull(result);
-	}
 
 	public void shouldRemoveEmployee()  {
 		// given
@@ -129,6 +125,5 @@ public class EmployeeServiceTest {
 		// then
 		assertEquals(expectedEmployeeName, employeeList.get(0).getName());
 		assertEquals(expectedEmployeeSurname, employeeList.get(0).getSurname());
-		assertEquals(1, employeeList.size());
 	}
 }
