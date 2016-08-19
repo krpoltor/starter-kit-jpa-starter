@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,7 @@ public class EmployeeServiceTest {
 	private DivisionDao divisionDao;
 
 	@Test 
+	@Transactional
 	public void shouldAddEmployee() {
 		// given
 		EmployeeEntity expectedEmployee = new EmployeeEntity();
@@ -76,7 +79,8 @@ public class EmployeeServiceTest {
 		
 	}
 	
-
+	@Test
+	@Transactional
 	public void shouldRemoveEmployee()  {
 		// given
 		// when
@@ -85,6 +89,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void shouldUpdateEmployeePersonalData() {
 		// given
 		// when
@@ -93,6 +98,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void shouldChangeEmployeeDivision()  {
 		// given
 		// when
@@ -101,6 +107,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void shouldFindEmployeesByNameAndSurname()  {
 		// given
 		String employeeName = "Nicole";
@@ -114,6 +121,7 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void shouldFindEmployeesByDivision()  {
 		// given
 		String divisionName = "Finances";

@@ -1,20 +1,18 @@
 package com.capgemini.generated.entities;
 // Generated Aug 18, 2016 1:29:28 PM by Hibernate Tools 4.3.1.Final
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +26,7 @@ import javax.persistence.Version;
 public class EmployeeEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private Integer id;
 	private int version;
 	private ContactDataEntity contactData;
@@ -82,7 +80,7 @@ public class EmployeeEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
+	@Column(name = "version", nullable = false,columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -91,8 +89,8 @@ public class EmployeeEntity implements java.io.Serializable {
 		this.version = version;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "contact_data_id", nullable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "contact_data_id", nullable = false)
 	public ContactDataEntity getContactData() {
 		return this.contactData;
 	}
@@ -101,8 +99,8 @@ public class EmployeeEntity implements java.io.Serializable {
 		this.contactData = contactData;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "division_id", nullable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "division_id", nullable = false)
 	public DivisionEntity getDivision() {
 		return this.division;
 	}
@@ -150,7 +148,7 @@ public class EmployeeEntity implements java.io.Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at", nullable = false, length = 19,
-	columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+			columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -161,7 +159,7 @@ public class EmployeeEntity implements java.io.Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modified_at", nullable = false, length = 19,
-	columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+			columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}
