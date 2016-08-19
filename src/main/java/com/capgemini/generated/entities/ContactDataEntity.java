@@ -71,7 +71,7 @@ public class ContactDataEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false,columnDefinition = "INT DEFAULT 1")
+	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -145,6 +145,13 @@ public class ContactDataEntity implements java.io.Serializable {
 
 	public void setDivisions(Set<DivisionEntity> divisions) {
 		this.divisions = divisions;
+	}
+
+	@Override
+	public String toString() {
+		return "ContactDataEntity [id=" + id + ", version=" + version + ", email=" + email + ", mobilePhoneNumber="
+				+ mobilePhoneNumber + ", homePhoneNumber=" + homePhoneNumber + ", createdAt=" + createdAt
+				+ ", modifiedAt=" + modifiedAt + "]";
 	}
 
 }

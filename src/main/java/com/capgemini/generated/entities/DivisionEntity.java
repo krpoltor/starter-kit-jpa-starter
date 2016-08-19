@@ -128,4 +128,10 @@ public class DivisionEntity implements java.io.Serializable {
 		this.employees = employees;
 	}
 
+	@Override
+	public String toString() {
+		return "DivisionEntity [id=" + id + ", version=" + version + ", contactData=" + contactData + ", name=" + name
+				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+	}
+
 }

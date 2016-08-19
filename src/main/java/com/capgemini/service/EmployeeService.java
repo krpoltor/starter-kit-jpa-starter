@@ -13,4 +13,8 @@ public interface EmployeeService {
 	void addEmployee(EmployeeEntity testEmployee);
 
 	EmployeeEntity findById(Integer id);
+
+	void deleteEmployee(EmployeeEntity employeeToBeRemoved);
+
+	void updateEmployee(EmployeeEntity testEmployee);
 }

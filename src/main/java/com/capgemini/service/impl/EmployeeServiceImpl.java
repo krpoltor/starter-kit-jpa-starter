@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.dao.ContactDataDao;
 import com.capgemini.dao.EmployeeDao;
 import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.service.EmployeeService;
@@ -17,6 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private EmployeeDao employeeDao;
+	
+	@Autowired
+	private ContactDataDao contactDataDao;
 
 	@Override
 	public List<EmployeeEntity> findEmployeesByNameAndSurname(String employeeName, String employeeSurname) {
@@ -36,6 +40,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public EmployeeEntity findById(Integer id) {
 		return employeeDao.findOne(id);
+	}
+
+	@Override
+	public void deleteEmployee(EmployeeEntity employee) {
+		employeeDao.delete(employee);
+		contactDataDao.delete(employee.getContactData());
+	}
+
+	@Override
+	public void updateEmployee(EmployeeEntity employee) {
+		employeeDao.update(employee);
 	}
 
 }

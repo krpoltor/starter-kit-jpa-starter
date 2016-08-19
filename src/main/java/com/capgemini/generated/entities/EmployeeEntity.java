@@ -80,7 +80,7 @@ public class EmployeeEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false,columnDefinition = "INT DEFAULT 1")
+	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -175,6 +175,13 @@ public class EmployeeEntity implements java.io.Serializable {
 
 	public void setEmployee2projects(Set<Employee2projectEntity> employee2projects) {
 		this.employee2projects = employee2projects;
+	}
+
+	@Override
+	public String toString() {
+		return "EmployeeEntity [id=" + id + ", version=" + version + ", contactData=" + contactData + ", division="
+				+ division + ", pesel=" + pesel + ", name=" + name + ", surname=" + surname + ", dob=" + dob
+				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
 	}
 
 }

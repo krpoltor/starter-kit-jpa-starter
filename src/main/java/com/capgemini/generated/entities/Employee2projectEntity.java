@@ -153,4 +153,12 @@ public class Employee2projectEntity implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee2projectEntity [id=" + id + ", version=" + version + ", employee=" + employee + ", project="
+				+ project + ", role=" + role + ", employeeStartOfWork=" + employeeStartOfWork + ", employeeEndOfWork="
+				+ employeeEndOfWork + ", salary=" + salary + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt
+				+ "]";
+	}
+
 }

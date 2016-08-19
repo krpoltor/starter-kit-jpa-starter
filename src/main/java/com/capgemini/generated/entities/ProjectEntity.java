@@ -149,4 +149,11 @@ public class ProjectEntity implements java.io.Serializable {
 		this.employee2projects = employee2projects;
 	}
 
+	@Override
+	public String toString() {
+		return "ProjectEntity [id=" + id + ", version=" + version + ", name=" + name + ", type=" + type
+				+ ", startOfProject=" + startOfProject + ", endOfProject=" + endOfProject + ", createdAt=" + createdAt
+				+ ", modifiedAt=" + modifiedAt + "]";
+	}
+
 }
