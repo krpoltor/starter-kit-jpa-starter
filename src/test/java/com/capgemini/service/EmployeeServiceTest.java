@@ -1,12 +1,14 @@
 package com.capgemini.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -50,6 +52,9 @@ public class EmployeeServiceTest {
 
 	@Autowired
 	private DivisionDao divisionDao;
+
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	private static Logger LOGGER = Logger.getLogger(EmployeeServiceTest.class.getName());
 
@@ -164,11 +169,11 @@ public class EmployeeServiceTest {
 		int divId = employeeService.findById(1).getDivision().getId();
 		assertEquals(2, divId);
 	}
-	
+
 	@Test
 	@Transactional
 	public void shouldIncrementEmployeeVersion() {
-		//given
+		// given
 		EmployeeEntity testEmployee = employeeService.findById(1);
 		LOGGER.info("Increment version test.");
 		LOGGER.info("Preparing employee to change division: " + testEmployee.toString());
@@ -177,10 +182,29 @@ public class EmployeeServiceTest {
 		LOGGER.info("Changing employee division to: " + division.toString());
 		// when
 		employeeService.updateEmployee(testEmployee);
+		entityManager.flush();
 		LOGGER.info("Changed employee's division.");
 		LOGGER.info("Showing employee: " + employeeService.findById(1).toString());
-		//then
+		// then
 		assertEquals(2, employeeService.findById(1).getVersion());
+	}
+
+	@Test
+ @Transactional
+	public void shouldChangeFieldModifiedAt() {
+		// given
+		EmployeeEntity testEmployee = employeeService.findById(1);
+		LOGGER.info("Preparing to modify employee: " + testEmployee.toString());
+		DivisionEntity division = divisionDao.getOne(2);
+		testEmployee.setDivision(division);
+		 LOGGER.info("Changing employee division to: " + division.toString());
+		// when
+		employeeService.updateEmployee(testEmployee);
+		Date timeOfModification = new Date();
+		 LOGGER.info("Changed employee's division.");
+		 LOGGER.info("Showing employee: " + employeeService.findById(1).toString());
+		// then
+		assertEquals(timeOfModification, employeeService.findById(1).getModifiedAt());
 	}
 
 	@Test

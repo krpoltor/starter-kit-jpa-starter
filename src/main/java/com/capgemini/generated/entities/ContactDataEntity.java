@@ -71,7 +71,6 @@ public class ContactDataEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}

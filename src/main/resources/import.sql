@@ -1,16 +1,16 @@
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('finances@comp.com','finances-mobile','finances-home');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('hr@comp.com','hr-mobile','hr-home');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('r&d@comp.com','r&d-mobile','r&d-home');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('nicole.gilmore@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('nasim.strong@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('dana.pitts@comp.com','',''); 
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('ina.pitts@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('matthew.fernandez@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('drew.hayes@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('jared.beard@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('aileen.roach@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('sandra.robinson@comp.com','','');
-insert into contact_data (email, mobile_phone_number,home_phone_number) values ('nehru.bates@comp.com','','');
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('finances@comp.com','finances-mobile','finances-home',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('hr@comp.com','hr-mobile','hr-home',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('r&d@comp.com','r&d-mobile','r&d-home',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('nicole.gilmore@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('nasim.strong@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('dana.pitts@comp.com','','',1); 
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('ina.pitts@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('matthew.fernandez@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('drew.hayes@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('jared.beard@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('aileen.roach@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('sandra.robinson@comp.com','','',1);
+insert into contact_data (email, mobile_phone_number,home_phone_number,version) values ('nehru.bates@comp.com','','',1);
 
 
 insert into division (name,contact_data_id) values ('Finances',1);
@@ -18,16 +18,16 @@ insert into division (name,contact_data_id) values ('HR',2);
 insert into division (name,contact_data_id) values ('R&D',3);
 
 
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (86091361190,'Nicole','Gilmore','1977-06-30',2,4);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (58693843036,'Nasim','Strong','1973-07-01',3,5);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (75840336317,'Dana','Pitts','1969-08-20',2,6);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (73609893023,'Ina','Fernandez','1977-02-06',3,7);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (73458025427,'Matthew','Fernandez','1972-05-09',2,8);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (76269539170,'Drew','Hayes','1979-03-29',2,9);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (23763653426,'Jared','Beard','1971-11-24',2,10);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (71193568748,'Aileen','Roach','1979-08-17',2,11);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (52251433469,'Sandra','Robinson','1979-10-23',3,12);
-insert into employee (pesel,name,surname,dob,division_id,contact_data_id) values (83185371663,'Nehru','Bates','1971-11-04',1,13);
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (86091361190,'Nicole','Gilmore','1977-06-30',2,4,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (58693843036,'Nasim','Strong','1973-07-01',3,5,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (75840336317,'Dana','Pitts','1969-08-20',2,6,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (73609893023,'Ina','Fernandez','1977-02-06',3,7,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (73458025427,'Matthew','Fernandez','1972-05-09',2,8,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (76269539170,'Drew','Hayes','1979-03-29',2,9,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (23763653426,'Jared','Beard','1971-11-24',2,10,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (71193568748,'Aileen','Roach','1979-08-17',2,11,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (52251433469,'Sandra','Robinson','1979-10-23',3,12,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
+insert into employee (pesel,name,surname,dob,division_id,contact_data_id,version,created_at,modified_at) values (83185371663,'Nehru','Bates','1971-11-04',1,13,1,'2016-08-19 14:58:00','0000-00-00 00:00:00');
     
         
 insert into project (name,type,start_of_project,end_of_project) values ('TFI0Z','EXTERNAL','1971-10-24','2020-06-25');
