@@ -86,7 +86,6 @@ public class EmployeeServiceTest {
 
 	// TODO 1 Add logger.
 	// TODO 2 solve ProjectLeader problem (update)
-	// TODO 3 usun usuwanie contact data z dao pracownika, zrob na cascade
 	
 	@Test
 	@Transactional

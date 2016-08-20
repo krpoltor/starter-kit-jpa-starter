@@ -1,5 +1,6 @@
 package com.capgemini.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
@@ -9,7 +10,10 @@ import java.util.logging.Logger;
 import javax.transaction.Transactional;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.enums.ProjectType;
 import com.capgemini.generated.entities.EmployeeEntity;
@@ -29,31 +33,25 @@ import com.capgemini.generated.entities.ProjectEntity;
  * @author KRPOLTOR
  *
  */
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ProjectServiceTest {
 	
 	@Autowired
 	private ProjectService projectService;
+
+	@Autowired
+	private EmployeeService employeeService;
+	
+	@Autowired
+	private Employee2projectService employee2projectService;
 	
 	private static Logger LOGGER = Logger.getLogger(ProjectServiceTest.class.getName());
-
-	@Test
-	@Transactional
-	public void shouldAddProject() {
-		//given
-		ProjectEntity testProject = generateStubProject("stubProject");
-		//when
-		LOGGER.info("Adding stub employee to database: " + testProject.toString());
-		projectService.addProject(testProject);
-		LOGGER.info("Employee added.");
-		List<ProjectEntity> result = projectService.findProjectByName("Krzysztof");
-		LOGGER.info("Found employees: " + result.toString());
-		//then
-		
-	}
-
+	
 	private ProjectEntity generateStubProject(String name) {
 		ProjectEntity testProject = new ProjectEntity();
-		testProject.setName("newName");
+		testProject.setName(name);
 		testProject.setType(ProjectType.EXTERNAL.toString());
 		testProject.setStartOfProject(new Date());
 		testProject.setEndOfProject(new Date());
@@ -61,6 +59,73 @@ public class ProjectServiceTest {
 		testProject.setCreatedAt(new Date());
 		testProject.setModifiedAt(new Date());
 		return testProject;
+	}
+	
+	@Test
+	@Transactional
+	public void shouldAddProject() {
+		//given
+		ProjectEntity testProject = generateStubProject("stubProject");
+		//when
+		LOGGER.info("Adding stub project to database: " + testProject.toString());
+		projectService.addProject(testProject);
+		LOGGER.info("Project added.");
+		List<ProjectEntity> result = projectService.findProjectByName("stubProject");
+		LOGGER.info("Found project: " + result.toString());
+		//then
+		assertEquals(1, result.size());
+	}
+	
+	@Test
+	@Transactional
+	public void shouldRemoveProject() {
+		// given
+		ProjectEntity stubProject = generateStubProject("stubProject");
+		LOGGER.info("Adding stub Project to database: " + stubProject.toString());
+		projectService.addProject(stubProject);
+		LOGGER.info("Project added.");
+		// when
+		projectService.deleteProject(stubProject);
+		LOGGER.info("Project removed.");
+		// then
+		assertEquals(null, projectService.findById(stubProject.getId()));
+	}
+	
+	@Test
+	@Transactional
+	public void shouldUpdateProject() {
+		//given
+		ProjectEntity stubProject = projectService.findById(1);
+		String stubName = "stubName";
+		String stubType = "INTERNAL";
+		Date stubDate = new Date();
+		
+		stubProject.setName(stubName);
+		stubProject.setType(stubType);
+		stubProject.setStartOfProject(stubDate);
+		stubProject.setEndOfProject(stubDate);
+		//when
+		LOGGER.info("Updating project data to: " + stubProject.toString());
+		projectService.updateProject(stubProject);
+		LOGGER.info("Project updated.");
+		//then
+		assertEquals(stubName, projectService.findById(1).getName());
+		assertEquals(stubType, projectService.findById(1).getType());
+		assertEquals(stubDate, projectService.findById(1).getStartOfProject());
+		assertEquals(stubDate, projectService.findById(1).getEndOfProject());
+	}
+	
+	@Test
+	@Transactional
+	public void shouldAddEmployeeToProject() {
+		//given
+		EmployeeEntity testEmployee = employeeService.findById(2);
+		ProjectEntity testProject = projectService.findById(2);
+		//when
+		employee2projectService.addEmployeeToProject(testProject, testEmployee);
+		//then
+		
+		fail();
 	}
 
 }
