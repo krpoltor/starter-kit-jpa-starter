@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -95,7 +96,7 @@ public class EmployeeEntity implements java.io.Serializable {
 		this.version = version;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "contact_data_id", nullable = false)
 	public ContactDataEntity getContactData() {
 		return this.contactData;
@@ -172,7 +173,7 @@ public class EmployeeEntity implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
 	public Set<Employee2projectEntity> getEmployee2projects() {
 		return this.employee2projects;
 	}

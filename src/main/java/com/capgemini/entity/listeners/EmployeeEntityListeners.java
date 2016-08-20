@@ -10,7 +10,8 @@ public class EmployeeEntityListeners {
 	
 	@PreUpdate
 	public void employeeEntityPostUpdate(EmployeeEntity employeeEntity){
-		employeeEntity.setVersion(2);
+		Integer incrementedPreviousVersion = employeeEntity.getVersion()+1;
+		employeeEntity.setVersion(incrementedPreviousVersion);
 		employeeEntity.setModifiedAt(new Date());
 		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}

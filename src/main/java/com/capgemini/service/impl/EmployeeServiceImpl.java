@@ -45,7 +45,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void deleteEmployee(EmployeeEntity employee) {
 		employeeDao.delete(employee);
-		contactDataDao.delete(employee.getContactData());
 	}
 
 	@Override

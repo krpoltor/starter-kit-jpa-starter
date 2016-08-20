@@ -10,11 +10,11 @@ public interface EmployeeService {
 
 	List<EmployeeEntity> findEmployeesByDivision(String divisionName);
 
-	void addEmployee(EmployeeEntity testEmployee);
+	void addEmployee(EmployeeEntity employee);
 
 	EmployeeEntity findById(Integer id);
 
-	void deleteEmployee(EmployeeEntity employeeToBeRemoved);
+	void deleteEmployee(EmployeeEntity employee);
 
-	void updateEmployee(EmployeeEntity testEmployee);
+	void updateEmployee(EmployeeEntity employee);
 }
