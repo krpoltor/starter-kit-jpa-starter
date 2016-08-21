@@ -84,8 +84,6 @@ public class EmployeeServiceTest {
 		return stubEmployee;
 	}
 
-	// TODO 2 solve ProjectLeader problem (update)
-	
 	@Test
 	@Transactional
 	public void shouldAddEmployee() {
@@ -101,6 +99,7 @@ public class EmployeeServiceTest {
 		assertEquals(stubEmployee, result.get(0));
 	}
 
+	// TODO 2 solve ProjectLeader problem (update)
 	@Test
 	@Transactional
 	public void shouldRemoveEmployee() {
