@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.capgemini.dao.ProjectDao;
 import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.generated.entities.ProjectEntity;
-import com.capgemini.service.Employee2projectService;
 import com.capgemini.service.ProjectService;
 
 @Service
@@ -19,9 +18,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
 	private ProjectDao projectDao;
-	
-	@Autowired
-	private Employee2projectService employee2projectSerice;
 
 	@Override
 	public List<ProjectEntity> findProjectByName(String projectName) {
@@ -41,17 +37,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void updateProject(ProjectEntity project) {
 		projectDao.update(project);
-	}
-
-	@Override
-	public void addEmployeeToProject(ProjectEntity projectEntity, EmployeeEntity employeeEntity) {
-		employee2projectSerice.addEmployeeToProject(projectEntity,employeeEntity);
-	}
-
-	@Override
-	public void removeEmployeeFromProject(ProjectEntity projectEntity, EmployeeEntity employeeEntity) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

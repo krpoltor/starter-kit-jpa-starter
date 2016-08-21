@@ -84,7 +84,6 @@ public class EmployeeServiceTest {
 		return stubEmployee;
 	}
 
-	// TODO 1 Add logger.
 	// TODO 2 solve ProjectLeader problem (update)
 	
 	@Test

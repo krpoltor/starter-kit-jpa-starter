@@ -21,10 +21,6 @@ public interface ProjectService {
 
 	void updateProject(ProjectEntity project);
 
-	void addEmployeeToProject(ProjectEntity projectEntity, EmployeeEntity employeeEntity);
-	
-	void removeEmployeeFromProject(ProjectEntity projectEntity, EmployeeEntity employeeEntity);
-	
 	ProjectEntity findById(Integer id);
 
 }
