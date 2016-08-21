@@ -1,7 +1,6 @@
 package com.capgemini.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.enums.EmployeeRole;
 import com.capgemini.enums.ProjectType;
+import com.capgemini.generated.entities.Employee2projectEntity;
 import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.generated.entities.ProjectEntity;
 
@@ -61,6 +61,28 @@ public class ProjectServiceTest {
 		testProject.setCreatedAt(new Date());
 		testProject.setModifiedAt(new Date());
 		return testProject;
+	}
+
+	private Employee2projectEntity generateStubEmployee2projectEntity() {
+		Employee2projectEntity testE2P = new Employee2projectEntity();
+		ProjectEntity testProject = projectService.findById(2);
+		testE2P.setProject(testProject);
+		EmployeeEntity testEmployee = employeeService.findById(2);
+		testE2P.setEmployee(testEmployee);
+		Date employeeStartOfWork = new Date();
+		testE2P.setEmployeeStartOfWork(employeeStartOfWork);
+		Date employeeEndOfWork = new Date();
+		testE2P.setEmployeeEndOfWork(employeeEndOfWork);
+		EmployeeRole role = EmployeeRole.DEV;
+		testE2P.setRole(role);
+		BigDecimal salary = new BigDecimal("1000");
+		testE2P.setSalary(salary);
+		
+		testE2P.setCreatedAt(new Date());
+		testE2P.setModifiedAt(new Date());
+		testE2P.setVersion(1);
+		
+		return testE2P;
 	}
 
 	@Test
@@ -121,18 +143,59 @@ public class ProjectServiceTest {
 	@Transactional
 	public void shouldAddEmployeeToProject() {
 		// given
-		ProjectEntity testProject = projectService.findById(2);
-		EmployeeEntity testEmployee = employeeService.findById(2);
-		Date employeeStartOfWork = new Date();
-		Date employeeEndOfWork = new Date();
-		EmployeeRole role = EmployeeRole.DEV;
-		BigDecimal salary = new BigDecimal("1000");
+		Employee2projectEntity testE2PEntity = generateStubEmployee2projectEntity();
+		LOGGER.info("Created stub Employee2projectEntity: " + testE2PEntity.toString());
 		// when
-		employee2projectService.addEmployeeToProject(testProject, testEmployee, employeeStartOfWork, employeeEndOfWork,
-				role, salary);
+		employee2projectService.addEmployeeToProject(testE2PEntity);
+		LOGGER.info("Added employee to project: " + testE2PEntity.toString());
+		List<Employee2projectEntity> foundE2PEntity = employee2projectService.getEmployee2project(testE2PEntity.getProject(),
+				testE2PEntity.getEmployee());
+		LOGGER.info("Found employees: " + foundE2PEntity.toString());
 		// then
+		assertEquals(1, foundE2PEntity.size());
+	}
 
-		fail();
+	@Test(expected = NullPointerException.class)
+	@Transactional
+	public void shouldRemoveEmployeeFromProject() {
+		//given
+		Employee2projectEntity testE2PEntity = generateStubEmployee2projectEntity();
+		LOGGER.info("Created stub Employee2projectEntity: " + testE2PEntity.toString());
+		employee2projectService.addEmployee2projectEntity(testE2PEntity);
+		LOGGER.info("Added employee to project: " + testE2PEntity.toString());
+		//when
+		employee2projectService.removeEmployeeFromProject(testE2PEntity);
+		LOGGER.info("Removed employee from project: " + testE2PEntity.toString());
+		List<Employee2projectEntity> foundE2PEntity = employee2projectService.getEmployee2project(testE2PEntity.getProject(),
+				testE2PEntity.getEmployee());
+		//then
+	}
+	
+	@Test
+	@Transactional
+	public void shouldFindEmployeesWorkingOnProject() {
+		//given
+		ProjectEntity testProject = projectService.findById(1);
+		LOGGER.info("Test project: " + testProject.toString());
+		//when
+		List<EmployeeEntity> resultList = employee2projectService.findEmployeesWorkingOnProject(testProject);
+		LOGGER.info("Found employees assigned to project: "+ resultList.toString());
+		//then
+		assertEquals(2, resultList.size());
+	}
+
+	@Test
+	@Transactional
+	public void shouldFindEmployeesWhoWorkedOnProjectLongerThanNMonths() {
+		//given
+		ProjectEntity testProject = projectService.findById(1);
+		LOGGER.info("Test project: " + testProject.toString());
+		Integer noOfMonths = 3;
+		//when
+		List<EmployeeEntity> resultList = employee2projectService.findEmployeesWhoWorkedOnProjectLongerThanNMonths(testProject,noOfMonths);
+		LOGGER.info("Found employees assigned longer than: " + noOfMonths + " months to project: "+ resultList.toString());
+		//then
+		assertEquals(2, resultList.size());
 	}
 
 }

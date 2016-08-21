@@ -21,6 +21,8 @@ public class ProjectDaoImpl extends AbstractDao<ProjectEntity, Integer> implemen
 		query.setParameter("projectName", projectName);
 		return query.getResultList();
 	}
+	
+	//TODO find employee assigned to project
 
 	@Override
 	public List<EmployeeEntity> findEmployeesAssignedToProject(String projectName) {

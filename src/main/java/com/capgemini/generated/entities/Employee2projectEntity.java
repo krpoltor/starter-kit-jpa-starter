@@ -78,7 +78,7 @@ public class Employee2projectEntity implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id", nullable = false)
+	@JoinColumn(name = "employee_id", nullable = true)
 	public EmployeeEntity getEmployee() {
 		return this.employee;
 	}

@@ -21,8 +21,8 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Integer> implem
 	public List<EmployeeEntity> findEmployeesByNameAndSurname(String employeeName, String employeeSurname) {
 		TypedQuery<EmployeeEntity> query = //
 				entityManager.createQuery("select employee from EmployeeEntity employee "//
-						+ "where (upper(employee.name) like upper(:employeeName)"//
-						+ "and upper(employee.surname) like upper(:employeeSurname)"//
+						+ "where (upper(employee.name) = upper(:employeeName)"//
+						+ "and upper(employee.surname) = upper(:employeeSurname)"//
 						+ ")", EmployeeEntity.class);//
 		query.setParameter("employeeName", employeeName);
 		query.setParameter("employeeSurname", employeeSurname);
