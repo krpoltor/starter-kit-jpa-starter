@@ -37,7 +37,7 @@ public class Employee2projectServiceImpl implements Employee2projectService {
 		e2pEntity.setEmployeeEndOfWork(new Date());
 		e2pEntity.setEmployee(null);
 		employee2projectDao.update(e2pEntity);
-	}
+	} 
 
 	@Override
 	public void addEmployee2projectEntity(Employee2projectEntity employee2project) {

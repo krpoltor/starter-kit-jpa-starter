@@ -165,7 +165,7 @@ public class ProjectServiceTest {
 		List<Employee2projectEntity> foundE2PEntity = employee2projectService.getEmployee2project(testE2PEntity.getProject(),
 				testE2PEntity.getEmployee());
 		//then
-	}
+	} 
 	
 	@Test
 	public void shouldFindEmployeesWorkingOnProject() {

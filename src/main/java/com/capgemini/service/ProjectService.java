@@ -2,19 +2,12 @@ package com.capgemini.service;
 
 import java.util.List;
 
-import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.generated.entities.ProjectEntity;
 
 public interface ProjectService {
 	
-	List<ProjectEntity> findProjectByName(String projectName);
-	
 	List<ProjectEntity> findAllProjects();
 
-	List<EmployeeEntity> findEmployeesAssignedToProject(String projectName);
-	
-	List<EmployeeEntity> findEmployeesWhoParticipatedInProjectLongerThanNMonths(String projectName, Integer noOfMonths);
-	
 	void addProject(ProjectEntity projectProject);
 
 	void deleteProject(ProjectEntity project);
@@ -22,5 +15,7 @@ public interface ProjectService {
 	void updateProject(ProjectEntity project);
 
 	ProjectEntity findById(Integer id);
+
+	List<ProjectEntity> findProjectByName(String projectName);
 
 }

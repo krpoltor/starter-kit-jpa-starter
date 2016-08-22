@@ -35,18 +35,9 @@ public class Employee2projectDaoImpl extends AbstractDao<Employee2projectEntity,
 
 	@Override
 	public List<Employee2projectEntity> findEmployeesWorkingOnProject(ProjectEntity project) {
-		/*
-		 * TypedQuery<Employee2projectEntity> query = //
-		 * entityManager.createQuery(
-		 * "select employee2project from Employee2projectEntity employee2project"
-		 * // +
-		 * " where (upper(employee2project.project.name) = upper(:projectName) and"
-		 * // + " (employee2project.employeeEndOfWork) <= (CURRENT_TIMESTAMP))"
-		 * // , Employee2projectEntity.class);//
-		 * query.setParameter("projectName", project.getName()); return
-		 * query.getResultList();
-		 */
-		TypedQuery<Employee2projectEntity> query = entityManager.createNamedQuery("findEmployeesWorkingOnProject",
+
+		TypedQuery<Employee2projectEntity> query = entityManager.createQuery(
+				"select employee2project from Employee2projectEntity employee2project where upper(employee2project.project.name) = upper(:projectName) and (employee2project.employeeEndOfWork) <= (NOW())",
 				Employee2projectEntity.class);
 		query.setParameter("projectName", project.getName());
 		return query.getResultList();
@@ -56,19 +47,9 @@ public class Employee2projectDaoImpl extends AbstractDao<Employee2projectEntity,
 	public List<Employee2projectEntity> findEmployeesWhoWorkedOnProjectLongerThanNMonths(ProjectEntity project,
 			Integer noOfMonths) {
 		TypedQuery<Employee2projectEntity> query = //
-				entityManager.createQuery("select employee2project from Employee2projectEntity employee2project"//
-						+ " where ((employee2project.project.name) = (:projectName) and "
-						+ " (employee2project.employeeStartOfWork) <= (CURRENT_TIMESTAMP) and "
-						// HSQL
-						+ "MONTHS_BETWEEN(DATETIME employee2project.employeeEndOfWork,DATETIME  employee2project.employeeStartOfWork) <= (:noOfMonths)"//
-						// MySQL
-						// +
-						// "PERIOD_DIFF(employee2project.employeeEndOfWork,employee2project.employeeStartOfWork)<=
-						// (:noOfMonths)"
-						+ ")"
-				// TIMESTAMPDIFF
-				// COALESCE
-						, Employee2projectEntity.class);//
+				entityManager.createQuery(
+						"select employee2project from Employee2projectEntity employee2project where upper(employee2project.project.name) = upper(:projectName) and TIMESTAMPDIFF(SQL_TSI_MONTH, employee2project.employeeStartOfWork, employee2project.employeeEndOfWork) > :noOfMonths)",
+						Employee2projectEntity.class);//
 		query.setParameter("projectName", project.getName());
 		query.setParameter("noOfMonths", noOfMonths);
 		return query.getResultList();

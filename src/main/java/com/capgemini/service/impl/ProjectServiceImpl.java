@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.dao.ProjectDao;
-import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.generated.entities.ProjectEntity;
 import com.capgemini.service.ProjectService;
 
@@ -37,18 +36,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void updateProject(ProjectEntity project) {
 		projectDao.update(project);
-	}
-
-	@Override
-	public List<EmployeeEntity> findEmployeesAssignedToProject(String projectName) {
-		return projectDao.findEmployeesAssignedToProject(projectName);
-	}
-
-	@Override
-	public List<EmployeeEntity> findEmployeesWhoParticipatedInProjectLongerThanNMonths(String projectName,
-			Integer noOfMonths) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

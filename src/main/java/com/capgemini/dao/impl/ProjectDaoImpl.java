@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.dao.ProjectDao;
-import com.capgemini.generated.entities.EmployeeEntity;
 import com.capgemini.generated.entities.ProjectEntity;
 
 @Component
@@ -22,16 +21,4 @@ public class ProjectDaoImpl extends AbstractDao<ProjectEntity, Integer> implemen
 		return query.getResultList();
 	}
 	
-	//TODO find employee assigned to project
-
-	@Override
-	public List<EmployeeEntity> findEmployeesAssignedToProject(String projectName) {
-		TypedQuery<EmployeeEntity> query = //
-				entityManager.createQuery("select employee from EmployeeEntity employee"//
-						+ " where upper(employee..name) = upper(:projectName)"//
-						+ ")", EmployeeEntity.class);//
-		query.setParameter("projectName", projectName);
-		return query.getResultList();
-	}
-
 }

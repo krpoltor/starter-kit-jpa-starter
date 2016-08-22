@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.OptimisticLockException;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -55,7 +54,7 @@ public class EmployeeServiceTest {
 	@Autowired
 	private DivisionDao divisionDao;
 
-	@PersistenceContext
+	@Autowired
 	private EntityManager entityManager;
 
 	private static Logger LOGGER = Logger.getLogger(EmployeeServiceTest.class.getName());
@@ -110,6 +109,7 @@ public class EmployeeServiceTest {
 		LOGGER.info("Employee added.");
 		// when
 		employeeService.deleteEmployee(employeeToBeRemoved);
+		entityManager.flush();
 		LOGGER.info("Employee removed.");
 		// then
 		assertEquals(null, employeeService.findById(employeeToBeRemoved.getId()));
@@ -160,7 +160,7 @@ public class EmployeeServiceTest {
 		// when
 		employeeService.updateEmployee(testEmployee);
 		LOGGER.info("Changed employee's division.");
-		// then
+		// then 
 		int divId = employeeService.findById(1).getDivision().getId();
 		assertEquals(2, divId);
 	}
@@ -180,7 +180,7 @@ public class EmployeeServiceTest {
 		LOGGER.info("Changed employee's division.");
 		LOGGER.info("Showing employee: " + employeeService.findById(1).toString());
 		// then
-		assertEquals(2, employeeService.findById(1).getVersion());
+		assertEquals(new Integer(2), employeeService.findById(1).getVersion());
 	}
 
 	@Test
@@ -190,10 +190,11 @@ public class EmployeeServiceTest {
 		LOGGER.info("Preparing to modify employee: " + testEmployee.toString());
 		DivisionEntity division = divisionDao.getOne(2);
 		testEmployee.setDivision(division);
+		Date timeOfModification = new Date();
 		LOGGER.info("Changing employee division to: " + division.toString());
 		// when
 		employeeService.updateEmployee(testEmployee);
-		Date timeOfModification = new Date();
+		entityManager.flush();
 		LOGGER.info("Changed employee's division.");
 		LOGGER.info("Showing employee: " + employeeService.findById(1).toString());
 		// then
