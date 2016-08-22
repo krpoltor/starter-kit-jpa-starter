@@ -13,7 +13,6 @@ public class EmployeeEntityListeners {
 		Integer incrementedPreviousVersion = employeeEntity.getVersion()+1;
 		employeeEntity.setVersion(incrementedPreviousVersion);
 		employeeEntity.setModifiedAt(new Date());
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
 
 }

@@ -20,9 +20,11 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Integer> implem
 	@Override
 	public List<EmployeeEntity> findEmployeesByNameAndSurname(String employeeName, String employeeSurname) {
 		TypedQuery<EmployeeEntity> query = //
-				entityManager.createQuery("select employee from EmployeeEntity employee "//
-						+ "where (upper(employee.name) = upper(:employeeName)"//
-						+ "and upper(employee.surname) = upper(:employeeSurname)"//
+				entityManager.createQuery("select employee from EmployeeEntity employee"//
+						+ " where "
+							+ " (upper(employee.name) = upper(:employeeName)"//
+						+ " and "
+							+ "upper(employee.surname) = upper(:employeeSurname)"//
 						+ ")", EmployeeEntity.class);//
 		query.setParameter("employeeName", employeeName);
 		query.setParameter("employeeSurname", employeeSurname);
@@ -33,7 +35,8 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Integer> implem
 	public List<EmployeeEntity> findEmployeesByDivision(String divisionName) {
 		TypedQuery<EmployeeEntity> query = //
 				entityManager.createQuery("select employee from EmployeeEntity employee"//
-						+ " where upper(employee.division.name) = upper(:divisionName)"//
+						+ " where "
+							+ "upper(employee.division.name) = upper(:divisionName)"//
 						+ ")", EmployeeEntity.class);//
 		query.setParameter("divisionName", divisionName);
 		return query.getResultList();

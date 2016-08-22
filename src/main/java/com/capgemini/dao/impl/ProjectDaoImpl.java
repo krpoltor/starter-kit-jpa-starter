@@ -16,7 +16,8 @@ public class ProjectDaoImpl extends AbstractDao<ProjectEntity, Integer> implemen
 	public List<ProjectEntity> findProjectByName(String projectName) {
 		TypedQuery<ProjectEntity> query = //
 				entityManager.createQuery("select project from ProjectEntity project"//
-						+ " where upper(project.name) = upper(:projectName)", ProjectEntity.class);//
+						+ " where "
+							+ "upper(project.name) = upper(:projectName)", ProjectEntity.class);//
 		query.setParameter("projectName", projectName);
 		return query.getResultList();
 	}
