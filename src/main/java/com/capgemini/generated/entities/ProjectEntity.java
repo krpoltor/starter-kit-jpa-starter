@@ -76,7 +76,7 @@ public class ProjectEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
+	@Column(name = "version", nullable = false)//, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -125,7 +125,7 @@ public class ProjectEntity implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false, length = 19, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "created_at", nullable = false, length = 19)//, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -135,7 +135,7 @@ public class ProjectEntity implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_at", nullable = false, length = 19, columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	@Column(name = "modified_at", nullable = false, length = 19)//, columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}

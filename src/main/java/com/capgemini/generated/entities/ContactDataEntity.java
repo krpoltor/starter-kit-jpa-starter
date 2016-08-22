@@ -107,8 +107,8 @@ public class ContactDataEntity implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false, length = 19,
-			columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "created_at", nullable = false, length = 19)
+			//columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -118,8 +118,8 @@ public class ContactDataEntity implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_at", nullable = false, length = 19,
-			columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	@Column(name = "modified_at", nullable = false, length = 19)
+			//columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}

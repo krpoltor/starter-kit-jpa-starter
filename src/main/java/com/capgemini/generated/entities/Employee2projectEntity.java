@@ -1,18 +1,22 @@
 package com.capgemini.generated.entities;
 // Generated Aug 18, 2016 1:29:28 PM by Hibernate Tools 4.3.1.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +29,26 @@ import com.capgemini.enums.EmployeeRole;
  */
 @Entity
 @Table(name = "employee2project"/* , catalog = "starterkit_jpa" */)
+@NamedQueries({
+	@NamedQuery(
+	name = "findEmployeesWorkingOnProject",
+	query = "select employee2project from Employee2projectEntity employee2project"
+			+ " where "
+			+ "(upper(employee2project.project.name) = upper(:projectName)"
+				+ " and "
+					+ "(employee2project.employeeEndOfWork) <= (CURRENT_TIMESTAMP))"
+	),	
+	@NamedQuery(
+	name = "findEmployeesWhoWorkedOnProjectLongerThanNMonths",
+	query = "select employee2project from Employee2projectEntity employee2project"
+			+ " where "
+				+ "employee2project.project.name = :projectName"
+					+ " and  "
+						+ "employee2project.employeeStartOfWork <= CURRENT_TIMESTAMP"
+						+ " and "
+						+ "TIMESTAMPDIFF(SQL_TSI_MONTH, employee2project.employeeEndOfWork,employee2project.employeeStartOfWork) <= :noOfMonths"
+	)
+})
 public class Employee2projectEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -68,7 +92,7 @@ public class Employee2projectEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
+	@Column(name = "version", nullable = false)//, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}
@@ -137,7 +161,7 @@ public class Employee2projectEntity implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false, length = 19, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "created_at", nullable = false, length = 19)//, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -147,7 +171,7 @@ public class Employee2projectEntity implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_at", nullable = false, length = 19, columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	@Column(name = "modified_at", nullable = false, length = 19)//, columnDefinition = "TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getModifiedAt() {
 		return this.modifiedAt;
 	}

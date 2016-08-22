@@ -1,6 +1,6 @@
 package com.capgemini.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -38,6 +38,7 @@ import com.capgemini.generated.entities.ProjectEntity;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class ProjectServiceTest {
 
 	@Autowired
@@ -86,7 +87,6 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldAddProject() {
 		// given
 		ProjectEntity testProject = generateStubProject("stubProject");
@@ -101,7 +101,6 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldRemoveProject() {
 		// given
 		ProjectEntity stubProject = generateStubProject("stubProject");
@@ -116,7 +115,6 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldUpdateProject() {
 		// given
 		ProjectEntity stubProject = projectService.findById(1);
@@ -140,7 +138,6 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldAddEmployeeToProject() {
 		// given
 		Employee2projectEntity testE2PEntity = generateStubEmployee2projectEntity();
@@ -156,7 +153,6 @@ public class ProjectServiceTest {
 	}
 
 	@Test(expected = NullPointerException.class)
-	@Transactional
 	public void shouldRemoveEmployeeFromProject() {
 		//given
 		Employee2projectEntity testE2PEntity = generateStubEmployee2projectEntity();
@@ -172,7 +168,6 @@ public class ProjectServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	public void shouldFindEmployeesWorkingOnProject() {
 		//given
 		ProjectEntity testProject = projectService.findById(1);
@@ -185,7 +180,6 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldFindEmployeesWhoWorkedOnProjectLongerThanNMonths() {
 		//given
 		ProjectEntity testProject = projectService.findById(1);

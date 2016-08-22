@@ -29,7 +29,7 @@ import com.capgemini.entity.listeners.EmployeeEntityListeners;
  */
 @Entity
 @Table(name = "employee"/* , catalog = "starterkit_jpa" */)
-@EntityListeners({EmployeeEntityListeners.class})
+@EntityListeners({ EmployeeEntityListeners.class })
 public class EmployeeEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -87,7 +87,7 @@ public class EmployeeEntity implements java.io.Serializable {
 	}
 
 	@Version
-	@Column(name = "version", nullable = false, columnDefinition = "INT DEFAULT 1")
+	@Column(name = "version", nullable = false)//, columnDefinition = "INT DEFAULT 1")
 	public int getVersion() {
 		return this.version;
 	}

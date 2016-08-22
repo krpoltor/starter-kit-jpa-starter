@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -42,6 +43,7 @@ import com.capgemini.generated.entities.EmployeeEntity;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class EmployeeServiceTest {
 
 	@Autowired
@@ -85,7 +87,6 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldAddEmployee() {
 		// given
 		EmployeeEntity stubEmployee = generateStubEmployee();
@@ -101,7 +102,6 @@ public class EmployeeServiceTest {
 
 	// TODO 2 solve ProjectLeader problem (update)
 	@Test
-	@Transactional
 	public void shouldRemoveEmployee() {
 		// given
 		EmployeeEntity employeeToBeRemoved = generateStubEmployee();
@@ -116,7 +116,6 @@ public class EmployeeServiceTest {
 	}
 
 	@Test(expected = EntityNotFoundException.class)
-	@Transactional
 	public void shouldRemoveEmployeeRelatedData() {
 		// given
 		EmployeeEntity employeeToBeRemoved = generateStubEmployee();
@@ -131,7 +130,6 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldUpdateEmployeePersonalData() {
 		// given
 		EmployeeEntity testEmployee = employeeService.findById(1);
@@ -152,7 +150,6 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldChangeEmployeeDivision() {
 		// given
 		EmployeeEntity testEmployee = employeeService.findById(1);
@@ -169,7 +166,6 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldIncrementEmployeeVersion() {
 		// given
 		EmployeeEntity testEmployee = employeeService.findById(1);
@@ -188,25 +184,23 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
- @Transactional
 	public void shouldChangeFieldModifiedAt() {
 		// given
 		EmployeeEntity testEmployee = employeeService.findById(1);
 		LOGGER.info("Preparing to modify employee: " + testEmployee.toString());
 		DivisionEntity division = divisionDao.getOne(2);
 		testEmployee.setDivision(division);
-		 LOGGER.info("Changing employee division to: " + division.toString());
+		LOGGER.info("Changing employee division to: " + division.toString());
 		// when
 		employeeService.updateEmployee(testEmployee);
 		Date timeOfModification = new Date();
-		 LOGGER.info("Changed employee's division.");
-		 LOGGER.info("Showing employee: " + employeeService.findById(1).toString());
+		LOGGER.info("Changed employee's division.");
+		LOGGER.info("Showing employee: " + employeeService.findById(1).toString());
 		// then
 		assertEquals(timeOfModification, employeeService.findById(1).getModifiedAt());
 	}
 
 	@Test
-	@Transactional
 	public void shouldFindEmployeesByNameAndSurname() {
 		// given
 		String employeeName = "Nicole";
@@ -220,7 +214,6 @@ public class EmployeeServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void shouldFindEmployeesByDivision() {
 		// given
 		String divisionName = "Finances";
@@ -232,5 +225,21 @@ public class EmployeeServiceTest {
 		// then
 		assertEquals(expectedEmployeeName, employeeList.get(0).getName());
 		assertEquals(expectedEmployeeSurname, employeeList.get(0).getSurname());
+	}
+
+	@Test(expected = OptimisticLockException.class)
+	public void shouldThrowAnErrorBecauseOfOptimisticLocking() {
+		// given
+		EmployeeEntity employee = employeeService.findById(1);
+		employee.setName("newEmployeeFirstName");
+		entityManager.detach(employee);
+		EmployeeEntity employeeNew = employeeService.findById(1);
+		employeeNew.setName("newEmployeeLastName");
+		entityManager.detach(employeeNew);
+		// when
+		employeeService.updateEmployee(employee);
+		entityManager.flush();
+		employeeService.updateEmployee(employeeNew);
+		// then
 	}
 }
