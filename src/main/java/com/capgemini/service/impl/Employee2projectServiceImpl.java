@@ -18,7 +18,7 @@ import com.capgemini.service.Employee2projectService;
 @Service
 @Transactional
 public class Employee2projectServiceImpl implements Employee2projectService {
-
+ 
 	@Autowired
 	private Employee2projectDao employee2projectDao;
 
@@ -35,7 +35,6 @@ public class Employee2projectServiceImpl implements Employee2projectService {
 	@Override
 	public void removeEmployeeFromProject(Employee2projectEntity e2pEntity) {
 		e2pEntity.setEmployeeEndOfWork(new Date());
-		e2pEntity.setEmployee(null);
 		employee2projectDao.update(e2pEntity);
 	} 
 

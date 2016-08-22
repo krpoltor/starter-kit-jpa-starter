@@ -41,7 +41,7 @@ import com.capgemini.generated.entities.ProjectEntity;
 @Transactional
 public class ProjectServiceTest {
 	
-	//Due to errors in testing version and modifiedAt fields I didn't implement them in ProjectServiceTest
+	//Due to errors in testing version and modifiedAt fields I didn't implement them in ProjectServiceTest.
 
 	@Autowired
 	private ProjectService projectService;
@@ -154,7 +154,7 @@ public class ProjectServiceTest {
 		assertEquals(1, foundE2PEntity.size());
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void shouldRemoveEmployeeFromProject() {
 		//given
 		Employee2projectEntity testE2PEntity = generateStubEmployee2projectEntity();
@@ -164,9 +164,8 @@ public class ProjectServiceTest {
 		//when
 		employee2projectService.removeEmployeeFromProject(testE2PEntity);
 		LOGGER.info("Removed employee from project: " + testE2PEntity.toString());
-		List<Employee2projectEntity> foundE2PEntity = employee2projectService.getEmployee2project(testE2PEntity.getProject(),
-				testE2PEntity.getEmployee());
 		//then
+		assertFalse(new Date().before(testE2PEntity.getEmployeeEndOfWork()));
 	} 
 	
 	@Test

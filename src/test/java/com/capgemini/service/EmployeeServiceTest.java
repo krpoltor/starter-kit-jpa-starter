@@ -99,7 +99,6 @@ public class EmployeeServiceTest {
 		assertEquals(stubEmployee, result.get(0));
 	}
 
-	// TODO 2 solve ProjectLeader problem (update)
 	@Test
 	public void shouldRemoveEmployee() {
 		// given
