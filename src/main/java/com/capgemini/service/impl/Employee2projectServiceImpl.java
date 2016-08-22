@@ -39,11 +39,6 @@ public class Employee2projectServiceImpl implements Employee2projectService {
 	} 
 
 	@Override
-	public void addEmployee2projectEntity(Employee2projectEntity employee2project) {
-		employee2projectDao.save(employee2project);
-	}
-
-	@Override
 	public List<EmployeeEntity> findEmployeesWorkingOnProject(ProjectEntity project) {
 		List<Employee2projectEntity> resultList = employee2projectDao.findEmployeesWorkingOnProject(project);
 		List<EmployeeEntity> employeeResultList = new LinkedList<EmployeeEntity>();

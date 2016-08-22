@@ -5,8 +5,6 @@ import java.util.List;
 import com.capgemini.generated.entities.ProjectEntity;
 
 public interface ProjectService {
-	
-	List<ProjectEntity> findAllProjects();
 
 	void addProject(ProjectEntity projectProject);
 
@@ -15,6 +13,8 @@ public interface ProjectService {
 	void updateProject(ProjectEntity project);
 
 	ProjectEntity findById(Integer id);
+
+	List<ProjectEntity> findAllProjects();
 
 	List<ProjectEntity> findProjectByName(String projectName);
 

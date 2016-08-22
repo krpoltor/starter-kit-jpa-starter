@@ -31,6 +31,7 @@ import com.capgemini.generated.entities.ProjectEntity;
  * 5. Remove employee from project (mark that he has ended working).<br>
  * 6. Find all employees working now on project.<br>
  * 7. Find all employees who worked on project longer than N months.<br>
+ * 8. Test finding every project.<br>
  * 
  * @author KRPOLTOR
  *
@@ -40,8 +41,9 @@ import com.capgemini.generated.entities.ProjectEntity;
 @SpringBootTest
 @Transactional
 public class ProjectServiceTest {
-	
-	//Due to errors in testing version and modifiedAt fields I didn't implement them in ProjectServiceTest.
+
+	// Due to errors in testing version and modifiedAt fields I didn't implement
+	// them in ProjectServiceTest.
 
 	@Autowired
 	private ProjectService projectService;
@@ -80,11 +82,11 @@ public class ProjectServiceTest {
 		testE2P.setRole(role);
 		BigDecimal salary = new BigDecimal("1000");
 		testE2P.setSalary(salary);
-		
+
 		testE2P.setCreatedAt(new Date());
 		testE2P.setModifiedAt(new Date());
 		testE2P.setVersion(1);
-		
+
 		return testE2P;
 	}
 
@@ -147,8 +149,8 @@ public class ProjectServiceTest {
 		// when
 		employee2projectService.addEmployeeToProject(testE2PEntity);
 		LOGGER.info("Added employee to project: " + testE2PEntity.toString());
-		List<Employee2projectEntity> foundE2PEntity = employee2projectService.getEmployee2project(testE2PEntity.getProject(),
-				testE2PEntity.getEmployee());
+		List<Employee2projectEntity> foundE2PEntity = employee2projectService
+				.getEmployee2project(testE2PEntity.getProject(), testE2PEntity.getEmployee());
 		LOGGER.info("Found employees: " + foundE2PEntity.toString());
 		// then
 		assertEquals(1, foundE2PEntity.size());
@@ -156,50 +158,52 @@ public class ProjectServiceTest {
 
 	@Test
 	public void shouldRemoveEmployeeFromProject() {
-		//given
+		// given
 		Employee2projectEntity testE2PEntity = generateStubEmployee2projectEntity();
 		LOGGER.info("Created stub Employee2projectEntity: " + testE2PEntity.toString());
-		employee2projectService.addEmployee2projectEntity(testE2PEntity);
+		employee2projectService.addEmployeeToProject(testE2PEntity);
 		LOGGER.info("Added employee to project: " + testE2PEntity.toString());
-		//when
+		// when
 		employee2projectService.removeEmployeeFromProject(testE2PEntity);
 		LOGGER.info("Removed employee from project: " + testE2PEntity.toString());
-		//then
+		// then
 		assertFalse(new Date().before(testE2PEntity.getEmployeeEndOfWork()));
-	} 
-	
+	}
+
 	@Test
 	public void shouldFindEmployeesWorkingOnProject() {
-		//given
+		// given
 		ProjectEntity testProject = projectService.findById(1);
 		LOGGER.info("Test project: " + testProject.toString());
-		//when
+		// when
 		List<EmployeeEntity> resultList = employee2projectService.findEmployeesWorkingOnProject(testProject);
-		LOGGER.info("Found employees assigned to project: "+ resultList.toString());
-		//then
+		LOGGER.info("Found employees assigned to project: " + resultList.toString());
+		// then
 		assertEquals(2, resultList.size());
 	}
 
 	@Test
 	public void shouldFindEmployeesWhoWorkedOnProjectLongerThanNMonths() {
-		//given
+		// given
 		ProjectEntity testProject = projectService.findById(1);
 		LOGGER.info("Test project: " + testProject.toString());
 		Integer noOfMonths = 3;
-		//when
-		List<EmployeeEntity> resultList = employee2projectService.findEmployeesWhoWorkedOnProjectLongerThanNMonths(testProject,noOfMonths);
-		LOGGER.info("Found employees assigned longer than: " + noOfMonths + " months to project: "+ resultList.toString());
-		//then
+		// when
+		List<EmployeeEntity> resultList = employee2projectService
+				.findEmployeesWhoWorkedOnProjectLongerThanNMonths(testProject, noOfMonths);
+		LOGGER.info(
+				"Found employees assigned longer than: " + noOfMonths + " months to project: " + resultList.toString());
+		// then
 		assertEquals(2, resultList.size());
 	}
-	
+
 	@Test
 	public void shouldFindAllProjects() {
-		//given
-		//import.sql
-		//when
+		// given
+		// import.sql
+		// when
 		List<ProjectEntity> resultList = projectService.findAllProjects();
-		//then
+		// then
 		assertEquals(10, resultList.size());
 	}
 

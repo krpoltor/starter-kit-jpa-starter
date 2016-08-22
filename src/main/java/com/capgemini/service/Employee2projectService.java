@@ -14,8 +14,6 @@ public interface Employee2projectService {
 
 	List<Employee2projectEntity> getEmployee2project(ProjectEntity project, EmployeeEntity employee);
 
-	void addEmployee2projectEntity(Employee2projectEntity employee2project);
-
 	List<EmployeeEntity> findEmployeesWorkingOnProject(ProjectEntity project);
 
 	List<EmployeeEntity> findEmployeesWhoWorkedOnProjectLongerThanNMonths(ProjectEntity project,
