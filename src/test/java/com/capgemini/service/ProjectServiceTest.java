@@ -1,6 +1,6 @@
 package com.capgemini.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -40,6 +40,8 @@ import com.capgemini.generated.entities.ProjectEntity;
 @SpringBootTest
 @Transactional
 public class ProjectServiceTest {
+	
+	//Due to errors in testing version and modifiedAt fields I didn't implement them in ProjectServiceTest
 
 	@Autowired
 	private ProjectService projectService;
@@ -190,6 +192,16 @@ public class ProjectServiceTest {
 		LOGGER.info("Found employees assigned longer than: " + noOfMonths + " months to project: "+ resultList.toString());
 		//then
 		assertEquals(2, resultList.size());
+	}
+	
+	@Test
+	public void shouldFindAllProjects() {
+		//given
+		//import.sql
+		//when
+		List<ProjectEntity> resultList = projectService.findAllProjects();
+		//then
+		assertEquals(10, resultList.size());
 	}
 
 }

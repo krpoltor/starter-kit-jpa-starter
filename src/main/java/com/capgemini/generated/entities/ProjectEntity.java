@@ -46,30 +46,8 @@ public class ProjectEntity implements java.io.Serializable {
 	public ProjectEntity() {
 	}
 
-	public ProjectEntity(String name, ProjectType type, Date startOfProject, Date endOfProject, Date createdAt,
-			Date modifiedAt) {
-		this.name = name;
-		this.type = type;
-		this.startOfProject = startOfProject;
-		this.endOfProject = endOfProject;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-	}
-
-	public ProjectEntity(String name, ProjectType type, Date startOfProject, Date endOfProject, Date createdAt,
-			Date modifiedAt, Set<Employee2projectEntity> employee2projects) {
-		this.name = name;
-		this.type = type;
-		this.startOfProject = startOfProject;
-		this.endOfProject = endOfProject;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-		this.employee2projects = employee2projects;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;

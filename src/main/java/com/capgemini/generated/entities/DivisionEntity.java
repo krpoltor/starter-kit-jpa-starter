@@ -53,18 +53,8 @@ public class DivisionEntity implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public DivisionEntity(ContactDataEntity contactData, String name, Date createdAt, Date modifiedAt,
-			Set<EmployeeEntity> employees) {
-		this.contactData = contactData;
-		this.name = name;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-		this.employees = employees;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;

@@ -53,34 +53,8 @@ public class EmployeeEntity implements java.io.Serializable {
 	public EmployeeEntity() {
 	}
 
-	public EmployeeEntity(ContactDataEntity contactData, DivisionEntity division, String pesel, String name,
-			String surname, Date dob, Date createdAt, Date modifiedAt) {
-		this.contactData = contactData;
-		this.division = division;
-		this.pesel = pesel;
-		this.name = name;
-		this.surname = surname;
-		this.dob = dob;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-	}
-
-	public EmployeeEntity(ContactDataEntity contactData, DivisionEntity division, String pesel, String name,
-			String surname, Date dob, Date createdAt, Date modifiedAt, Set<Employee2projectEntity> employee2projects) {
-		this.contactData = contactData;
-		this.division = division;
-		this.pesel = pesel;
-		this.name = name;
-		this.surname = surname;
-		this.dob = dob;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-		this.employee2projects = employee2projects;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;

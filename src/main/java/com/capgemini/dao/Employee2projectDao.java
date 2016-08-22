@@ -14,5 +14,4 @@ public interface Employee2projectDao extends Dao<Employee2projectEntity, Integer
 
 	List<Employee2projectEntity> findEmployeesWhoWorkedOnProjectLongerThanNMonths(ProjectEntity project,
 			Integer noOfMonths);
-
 }

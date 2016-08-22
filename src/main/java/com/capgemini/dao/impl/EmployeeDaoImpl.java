@@ -15,7 +15,7 @@ import com.capgemini.generated.entities.EmployeeEntity;
 public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Integer> implements EmployeeDao {
 
 	@PersistenceContext
-	protected EntityManager entityManager;
+	protected EntityManager entityManager; 
 
 	@Override
 	public List<EmployeeEntity> findEmployeesByNameAndSurname(String employeeName, String employeeSurname) {

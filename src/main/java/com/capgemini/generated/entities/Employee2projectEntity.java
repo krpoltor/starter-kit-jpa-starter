@@ -50,21 +50,8 @@ public class Employee2projectEntity implements java.io.Serializable {
 	public Employee2projectEntity() {
 	}
 
-	public Employee2projectEntity(EmployeeEntity employee, ProjectEntity project, EmployeeRole role,
-			Date employeeStartOfWork, Date employeeEndOfWork, BigDecimal salary, Date createdAt, Date modifiedAt) {
-		this.employee = employee;
-		this.project = project;
-		this.role = role;
-		this.employeeStartOfWork = employeeStartOfWork;
-		this.employeeEndOfWork = employeeEndOfWork;
-		this.salary = salary;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;

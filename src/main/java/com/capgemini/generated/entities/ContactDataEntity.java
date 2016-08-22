@@ -51,20 +51,8 @@ public class ContactDataEntity implements java.io.Serializable {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public ContactDataEntity(String email, String mobilePhoneNumber, String homePhoneNumber, Date createdAt, Date modifiedAt,
-			Set<EmployeeEntity> employees, Set<DivisionEntity> divisions) {
-		this.email = email;
-		this.mobilePhoneNumber = mobilePhoneNumber;
-		this.homePhoneNumber = homePhoneNumber;
-		this.createdAt = createdAt;
-		this.modifiedAt = modifiedAt;
-		this.employees = employees;
-		this.divisions = divisions;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
